@@ -1,0 +1,44 @@
+<?php
+$fname = filter_input(INPUT_POST, 'fname');
+$lname = filter_input(INPUT_POST, 'lname');
+$uname = filter_input(INPUT_POST, 'uname');
+$passwrd = filter_input(INPUT_POST, 'passwrd');
+$gender = filter_input(INPUT_POST, 'gender');
+if (!empty($fname)){
+if (!empty($lname)){
+if (!empty($uname)){
+if (!empty($passwrd)){
+if (!empty($gender)){
+$host = "localhost";
+$dbusername = "root";
+$dbpassword = "";
+$dbname = "feed";
+// Create connection
+$conn = new mysqli ($host, $dbusername, $dbpassword, $dbname);
+if (mysqli_connect_error()){
+die('Connect Error ('. mysqli_connect_errno() .') '
+. mysqli_connect_error());
+}
+else{
+$sql = "INSERT INTO users (fname, lname, uname, passwrd, gender)
+values ('$fname','$lname','$uname','$passwrd','$gender')";
+if ($conn->query($sql)){
+echo "Welcome";
+}
+else{
+echo "Error: ". $sql ."
+". $conn->error;
+}
+$conn->close();
+}
+}
+else{
+echo "password should should not be empty";
+die();
+}
+}
+else{
+echo "username should not be empty";
+die();
+}
+?>
